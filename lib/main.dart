@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:restaurants/account/account.dart';
 import 'package:restaurants/favorites/favorites.dart';
+import 'package:restaurants/r_colors.dart';
 import 'package:restaurants/restaurants/restaurants.dart';
 import 'package:restaurants/search/search.dart';
 import 'package:restaurants/top_restaurants/top_restaurants.dart';
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Restaurants | lfdel24@gmail.com',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: RColors.purpleAccent,
       ),
       home: NavigatorView(),
     );
@@ -37,12 +38,11 @@ class _NavigatorViewState extends State<NavigatorView> {
     AccountView()
   ];
 
-  void _onTab(int index){
+  void _onTab(int index) {
     setState(() {
       _currentIndex = index;
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
