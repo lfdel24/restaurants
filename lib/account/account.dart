@@ -3,11 +3,11 @@ import 'package:restaurants/account/user_guest.dart';
 
 class AccountView extends StatelessWidget {
 
-  final bool isLogged = true;
+  final bool isLogged = false;
 
   @override
   Widget build(BuildContext context) {
-    return isLogged ? Placeholder() : UserGuestView();
+    return UserGuestView();
   }
 }
 

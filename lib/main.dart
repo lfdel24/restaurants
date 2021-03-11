@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:restaurants/account/account.dart';
+import 'package:restaurants/account/user_guest.dart';
 import 'package:restaurants/favorites/favorites.dart';
 import 'package:restaurants/r_colors.dart';
 import 'package:restaurants/restaurants/restaurants.dart';
@@ -14,9 +15,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Restaurants | lfdel24@gmail.com',
       theme: ThemeData(
-        primaryColor: RColors.purpleAccent,
+        primaryColor: Colors.white
       ),
       home: NavigatorView(),
     );
@@ -29,8 +31,8 @@ class NavigatorView extends StatefulWidget {
 }
 
 class _NavigatorViewState extends State<NavigatorView> {
-  int _currentIndex = 0;
-  final List<Widget> views = [
+  int _currentIndex = 4;
+  final List<Widget> _views = [
     RestaurantsView(),
     FavoritesView(),
     TopRestaurantsView(),
@@ -47,20 +49,22 @@ class _NavigatorViewState extends State<NavigatorView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: _views.elementAt(_currentIndex),
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: RColors.purpleAccent,
         currentIndex: _currentIndex,
         onTap: _onTab,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined), label: "Restaurantes"),
+              icon: Icon(Icons.home_outlined, color: RColors.purple), label: "Restaurantes"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_border_outlined), label: "Favoritos"),
+              icon: Icon(Icons.favorite_border_outlined, color: RColors.purple), label: "Favoritos"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.star_border_outlined), label: "Top 5"),
+              icon: Icon(Icons.star_border_outlined, color: RColors.purple), label: "Top 5"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.search_off_outlined), label: "Buscar"),
+              icon: Icon(Icons.search_off_outlined, color: RColors.purple), label: "Buscar"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle_outlined), label: "Cuenta"),
+              icon: Icon(Icons.account_circle_outlined, color: RColors.purple,), label: "Cuenta"),
         ],
       ),
     );
