@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:restaurants/account/account.dart';
+import 'package:restaurants/account/views/account_view.dart';
+import 'package:restaurants/database.dart';
 import 'package:restaurants/favorites/favorites.dart';
 import 'package:restaurants/r_colors.dart';
 import 'package:restaurants/restaurants/restaurants.dart';
 import 'package:restaurants/search/search.dart';
 import 'package:restaurants/top_restaurants/top_restaurants.dart';
 
-import 'package:supabase/supabase.dart';
-
 void main() async {
-  const supabaseUrl = 'https://scymdokbleqmjncyglyy.supabase.co';
-  const supabaseKey =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYxNTU2OTI3MSwiZXhwIjoxOTMxMTQ1MjcxfQ.wTc2YdosfDwASn87MnkEU3ILFPoK0-vJvhaSZccwRDA';
 
-  final client = SupabaseClient(supabaseUrl, supabaseKey);
+  final client = Database().getSupabaseClient();
 
   // query data
   final response = await client

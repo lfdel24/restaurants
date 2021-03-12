@@ -1,4 +1,4 @@
-class AccountText{
+class AccountUtils{
 
   static String account = "Cuenta";
   static String title = "Consulta tu perfil en Restaurants";

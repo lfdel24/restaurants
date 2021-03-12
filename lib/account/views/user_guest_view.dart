@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:restaurants/account/account_text.dart';
+import 'package:restaurants/account/account_utils.dart';
 import 'package:restaurants/r_colors.dart';
 
 class UserGuestView extends StatelessWidget {
@@ -8,7 +8,7 @@ class UserGuestView extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            AccountText.account,
+            AccountUtils.account,
             style: Theme.of(context).textTheme.headline6,
           ),
           elevation: 1,
@@ -26,14 +26,14 @@ class UserGuestView extends StatelessWidget {
                     fit: BoxFit.cover,
                   )),
               SizedBox(height: 20),
-              Text(AccountText.title,
+              Text(AccountUtils.title,
                   style: Theme.of(context)
                       .textTheme
                       .headline6
                       ?.copyWith(fontWeight: FontWeight.bold)),
               SizedBox(height: 15),
               Text(
-                AccountText.subTitle,
+                AccountUtils.subTitle,
                 textAlign: TextAlign.justify,
                 style: Theme.of(context).textTheme.bodyText2,
               ),
@@ -45,7 +45,7 @@ class UserGuestView extends StatelessWidget {
                 child: MaterialButton(
                   onPressed: () {},
                   child: Text(
-                    AccountText.textButton,
+                    AccountUtils.textButton,
                     style: Theme.of(context)
                         .textTheme
                         .bodyText2
