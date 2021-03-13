@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:restaurants/account/views/account_view.dart';
+import 'package:restaurants/account/views/register_user_view.dart';
 import 'package:restaurants/favorites/favorites.dart';
 import 'package:restaurants/r_colors.dart';
 import 'package:restaurants/restaurants/restaurants.dart';
@@ -14,11 +14,12 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Restaurants | lfdel24@gmail.com',
       theme: ThemeData(primaryColor: Colors.white),
-      home: NavigatorView(),
+      //home: NavigatorView(),
+      home: RegisterUserView(),
     );
   }
 }
