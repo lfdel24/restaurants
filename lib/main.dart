@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:restaurants/account/views/account_view.dart';
-import 'package:restaurants/database.dart';
 import 'package:restaurants/favorites/favorites.dart';
 import 'package:restaurants/r_colors.dart';
 import 'package:restaurants/restaurants/restaurants.dart';
@@ -8,28 +8,13 @@ import 'package:restaurants/search/search.dart';
 import 'package:restaurants/top_restaurants/top_restaurants.dart';
 
 void main() async {
-
-  final client = Database().getSupabaseClient();
-
-  // query data
-  final response = await client
-      .from('test')
-      .select()
-      .order('name', ascending: true)
-      .execute();
-  if (response.error == null) {
-    print('response.data: ${response.data}');
-  } else {
-    print('response.data: ${response.data}');
-  }
-
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Restaurants | lfdel24@gmail.com',
       theme: ThemeData(primaryColor: Colors.white),
