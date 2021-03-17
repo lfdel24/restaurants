@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:restaurants/account/views/account_view.dart';
+import 'package:provider/provider.dart';
+import 'package:restaurants/account/controllers/register_user_controller.dart';
 import 'package:restaurants/account/views/register_user_view.dart';
 import 'package:restaurants/favorites/favorites.dart';
 import 'package:restaurants/r_colors.dart';
@@ -7,8 +8,15 @@ import 'package:restaurants/restaurants/restaurants.dart';
 import 'package:restaurants/search/search.dart';
 import 'package:restaurants/top_restaurants/top_restaurants.dart';
 
-void main() async {
-  runApp(MyApp());
+void main() {
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => RegisterUserController()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -36,7 +44,7 @@ class _NavigatorViewState extends State<NavigatorView> {
     FavoritesView(),
     TopRestaurantsView(),
     SearchView(),
-    AccountView()
+    RegisterUserView(),
   ];
 
   void _onTab(int index) {

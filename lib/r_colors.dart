@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-class RColors{
-
+class RColors {
   static Color purple = Color.fromRGBO(161, 125, 195, 1);
   static Color purpleAccent = Color.fromRGBO(68, 36, 112, 1);
-
-
+  static Color pink = Color.fromRGBO(212, 171, 187, 1);
+  static Color red = Color.fromRGBO(221, 100, 97, 1);
 }
 
 // <!-- The core Firebase JS SDK is always required and must be listed first -->
