@@ -12,12 +12,24 @@ class RegisterUserController extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool save(
+  Future<String> save(
       TextEditingController controllerName,
-      TextEditingController controllerEmail,
-      TextEditingController controllerPass) {
+      TextEditingController controllerMail,
+      TextEditingController controllerPass,
+      FocusNode focusNode) async {
     final user = UserModel(
-        "", controllerName.text, controllerEmail.text, controllerPass.text);
-    return UserService().create(user);
+        id: 0,
+        name: controllerName.text,
+        mail: controllerMail.text,
+        pass: controllerPass.text);
+    var resp = await UserService().create(user);
+    if (resp) {
+      controllerName.text = "";
+      controllerMail.text = "";
+      controllerPass.text = "";
+      focusNode.requestFocus();
+      return "Cuenta creada con éxito";
+    }
+    return "Correo y/o contraseña incorrecta";
   }
 }

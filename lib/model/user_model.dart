@@ -1,32 +1,39 @@
 class UserModel {
-  String _id;
-  String _name;
-  String _email;
-  String _pass;
+  late int _id = 0;
+  late String _name = "";
+  late String _mail = "";
+  late String _pass = "";
 
-  UserModel(this._id, this._name, this._email, this._pass);
-
-  String get pass => _pass;
-
-  set pass(String value) {
-    _pass = value;
+  UserModel(
+      {int id = 0, String name = "", String mail = "", String pass = ""}) {
+    this._id = id;
+    this._name = name;
+    this._mail = mail;
+    this._pass = pass;
   }
 
-  String get email => _email;
-
-  set email(String value) {
-    _email = value;
-  }
-
+  int get id => _id;
+  set id(int id) => _id = id;
   String get name => _name;
+  set name(String name) => _name = name;
+  String get mail => _mail;
+  set mail(String mail) => _mail = mail;
+  String get pass => _pass;
+  set pass(String pass) => _pass = pass;
 
-  set name(String value) {
-    _name = value;
+  UserModel.fromJson(Map<String, dynamic> json) {
+    _id = json['id'];
+    _name = json['name'];
+    _mail = json['mail'];
+    _pass = json['pass'];
   }
 
-  String get id => _id;
-
-  set id(String value) {
-    _id = value;
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this._id;
+    data['name'] = this._name;
+    data['mail'] = this._mail;
+    data['pass'] = this._pass;
+    return data;
   }
 }
