@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:restaurants/account/views/user_guest_view.dart';
+import 'package:restaurants/account/view/user_guest_view.dart';
 
 class AccountView extends StatelessWidget {
 

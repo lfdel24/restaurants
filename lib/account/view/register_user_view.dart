@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurants/account/controllers/register_user_controller.dart';
+import 'package:restaurants/account/controller/register_user_controller.dart';
 import 'package:restaurants/r_colors.dart';
 
 class RegisterUserView extends StatelessWidget {
@@ -58,17 +58,21 @@ class _BuildForm extends StatefulWidget {
 
 class __BuildFormState extends State<_BuildForm> {
   final _formKeyState = GlobalKey<FormState>();
-  final _nameController = TextEditingController(text: "");
-  final _emailController = TextEditingController(text: "");
-  final _passController = TextEditingController(text: "");
-  final _focusNodeNAme = FocusNode();
+  final _controllerName = TextEditingController(text: "");
+  final _controllerEmail = TextEditingController(text: "");
+  final _controllerPass = TextEditingController(text: "");
+  final _focusNodeName = FocusNode();
+  final _focusNodeEmail = FocusNode();
+  final _focusNodePass = FocusNode();
 
   @override
   void dispose() {
-    _nameController.dispose();
-    _emailController.dispose();
-    _passController.dispose();
-    _focusNodeNAme.dispose();
+    _controllerName.dispose();
+    _controllerEmail.dispose();
+    _controllerPass.dispose();
+    _focusNodeName.dispose();
+    _focusNodeEmail.dispose();
+    _focusNodePass.dispose();
     super.dispose();
   }
 
@@ -80,14 +84,27 @@ class __BuildFormState extends State<_BuildForm> {
         children: [
           SizedBox(height: 10),
           TextFormField(
-              controller: _nameController,
-              focusNode: _focusNodeNAme,
+              controller: _controllerName,
+              focusNode: _focusNodeName,
               autofocus: true,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  _focusNodeName.requestFocus();
+                  return "Ingrese un nombre";
+                }
+              },
               decoration: InputDecoration(
                   labelText: "Nombre", hintText: "Ingrese su nombre")),
           SizedBox(height: 10),
           TextFormField(
-            controller: _emailController,
+            controller: _controllerEmail,
+            focusNode: _focusNodeEmail,
+            validator: (value) {
+              if (value!.isEmpty) {
+                _focusNodeEmail.requestFocus();
+                return "Ingrese un email";
+              }
+            },
             decoration: InputDecoration(
                 labelText: "Email", hintText: "Ingrese un email"),
           ),
@@ -96,8 +113,15 @@ class __BuildFormState extends State<_BuildForm> {
             children: [
               Expanded(
                 child: TextFormField(
-                  controller: _passController,
+                  focusNode: _focusNodePass,
                   obscureText: context.read<RegisterUserController>().showPass,
+                  controller: _controllerPass,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      _focusNodePass.requestFocus();
+                      return "Ingrese una contraseña";
+                    }
+                  },
                   decoration: InputDecoration(
                     labelText: "Contaseña",
                     hintText: "Ingrese una contraseña",
@@ -123,11 +147,19 @@ class __BuildFormState extends State<_BuildForm> {
             height: 50,
             child: MaterialButton(
               onPressed: () {
-                context.read<RegisterUserController>().save(
-                    name: _nameController.text,
-                    email: _emailController.text,
-                    pass: _passController.text);
-                _focusNodeNAme.requestFocus();
+                if (_formKeyState.currentState!.validate()) {
+                  bool validate = context
+                      .read<RegisterUserController>()
+                      .save(_controllerName, _controllerEmail, _controllerPass);
+
+                  if (validate) {
+                    print("User created.");
+                  } else {
+                    print("User not created.");
+                  }
+
+                  _focusNodeName.requestFocus();
+                }
               },
               child: Text(
                 "Continuar",

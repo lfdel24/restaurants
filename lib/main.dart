@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurants/account/controllers/register_user_controller.dart';
-import 'package:restaurants/account/views/register_user_view.dart';
+import 'package:restaurants/account/controller/register_user_controller.dart';
+import 'package:restaurants/account/view/register_user_view.dart';
 import 'package:restaurants/favorites/favorites.dart';
 import 'package:restaurants/r_colors.dart';
 import 'package:restaurants/restaurants/restaurants.dart';
