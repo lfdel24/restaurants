@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:restaurants/account/view/register_user_view.dart';
 import 'package:restaurants/account/view/user_guest_view.dart';
 
 class AccountView extends StatelessWidget {
@@ -7,7 +8,7 @@ class AccountView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return UserGuestView();
+    return RegisterUserView();
   }
 }
 
