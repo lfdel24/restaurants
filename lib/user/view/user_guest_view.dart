@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:restaurants/account/account_utils.dart';
 import 'package:restaurants/r_colors.dart';
+import 'package:restaurants/user/account_utils.dart';
 
 class UserGuestView extends StatelessWidget {
   @override

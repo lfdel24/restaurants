@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurants/account/controller/register_user_controller.dart';
-import 'package:restaurants/account/view/register_user_view.dart';
 import 'package:restaurants/favorites/favorites.dart';
 import 'package:restaurants/r_colors.dart';
 import 'package:restaurants/restaurants/restaurants.dart';
 import 'package:restaurants/search/search.dart';
 import 'package:restaurants/top_restaurants/top_restaurants.dart';
+import 'package:restaurants/user/controller/register_user_controller.dart';
+import 'package:restaurants/user/view/account_view.dart';
 
 void main() {
   runApp(
@@ -26,8 +26,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Restaurants | lfdel24@gmail.com',
       theme: ThemeData(primaryColor: Colors.white),
-      //home: NavigatorView(),
-      home: RegisterUserView(),
+      home: NavigatorView(),
     );
   }
 }
@@ -44,7 +43,7 @@ class _NavigatorViewState extends State<NavigatorView> {
     FavoritesView(),
     TopRestaurantsView(),
     SearchView(),
-    RegisterUserView(),
+    AccountView()
   ];
 
   void _onTab(int index) {
