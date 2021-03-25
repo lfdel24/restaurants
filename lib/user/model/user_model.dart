@@ -12,6 +12,10 @@ class UserModel {
     this._pass = pass;
   }
 
+  bool isEmpty() {
+    return _id == 0;
+  }
+
   int get id => _id;
   set id(int id) => _id = id;
   String get name => _name;
@@ -35,5 +39,10 @@ class UserModel {
     data['mail'] = this._mail;
     data['pass'] = this._pass;
     return data;
+  }
+
+  @override
+  String toString() {
+    return 'UserModel{_id: $_id, _name: $_name, _mail: $_mail, _pass: $_pass}';
   }
 }

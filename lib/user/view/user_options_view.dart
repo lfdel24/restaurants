@@ -23,7 +23,9 @@ class UserOptionsView extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     UserController controller = UserController();
-                    controller.picker(context);
+                    //controller.picker(context);
+
+                    controller.login(mail: "lfdel24@gmail.coma", pass: "1");
                   },
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(100),

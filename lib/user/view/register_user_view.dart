@@ -148,7 +148,7 @@ class __BuildFormState extends State<_BuildForm> {
             child: MaterialButton(
               onPressed: () async {
                 if (_formKeyState.currentState!.validate()) {
-                  var resp = await context.read<UserController>().save(
+                  var resp = await context.read<UserController>().createUser(
                       _controllerName,
                       _controllerMail,
                       _controllerPass,
