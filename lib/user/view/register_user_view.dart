@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurants/r_colors.dart';
-import 'package:restaurants/user/controller/register_user_controller.dart';
+import 'package:restaurants/user/controller/user_controller.dart';
 
 class RegisterUserView extends StatelessWidget {
   final marginHorizontal = EdgeInsets.symmetric(horizontal: 12);
@@ -114,7 +114,7 @@ class __BuildFormState extends State<_BuildForm> {
               Expanded(
                 child: TextFormField(
                   focusNode: _focusNodePass,
-                  obscureText: context.read<RegisterUserController>().showPass,
+                  obscureText: context.read<UserController>().showPass,
                   controller: _controllerPass,
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -131,12 +131,12 @@ class __BuildFormState extends State<_BuildForm> {
               IconButton(
                   icon: Icon(
                     Icons.remove_red_eye_outlined,
-                    color: context.watch<RegisterUserController>().showPass
+                    color: context.watch<UserController>().showPass
                         ? Colors.black
                         : RColors.purpleAccent,
                   ),
                   onPressed: () {
-                    context.read<RegisterUserController>().changeShowPass();
+                    context.read<UserController>().changeShowPass();
                   }),
             ],
           ),
@@ -148,7 +148,7 @@ class __BuildFormState extends State<_BuildForm> {
             child: MaterialButton(
               onPressed: () async {
                 if (_formKeyState.currentState!.validate()) {
-                  var resp = await context.read<RegisterUserController>().save(
+                  var resp = await context.read<UserController>().save(
                       _controllerName,
                       _controllerMail,
                       _controllerPass,

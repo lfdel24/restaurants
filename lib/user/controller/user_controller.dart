@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:restaurants/model/user_model.dart';
-import 'package:restaurants/service/user_service.dart';
+import 'package:restaurants/user/service/user_service.dart';
 
-class RegisterUserController extends ChangeNotifier {
+class UserController extends ChangeNotifier {
   bool _showPass = true;
 
   bool get showPass => _showPass;
@@ -31,5 +31,9 @@ class RegisterUserController extends ChangeNotifier {
       return "Cuenta creada con éxito";
     }
     return "Correo y/o contraseña incorrecta";
+  }
+
+  void picker(BuildContext context) async {
+    //bool resp = await UserService().uploadImage(result.path);
   }
 }
