@@ -37,9 +37,19 @@ class UserController extends ChangeNotifier {
     return "Correo y/o contraseña incorrecta";
   }
 
-  void login({required String mail, required String pass}) async {
-    _user = await UserService().login(mail: mail, pass: pass);
-    print(_user);
+  void login(
+      {required TextEditingController mailController,
+      required TextEditingController passController,
+      required Function functionGood,
+      required Function functionError}) async {
+    _user = await UserService()
+        .login(mail: mailController.text, pass: passController.text);
+
+    if (_user.isEmpty()) {
+      functionError.call();
+    } else {
+      functionGood.call();
+    }
   }
 
   void picker(BuildContext context) async {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:restaurants/custom_widgets/custom_material_button.dart';
 import 'package:restaurants/r_colors.dart';
-import 'package:restaurants/user/controller/user_controller.dart';
 
 class UserOptionsView extends StatelessWidget {
   @override
@@ -22,10 +21,8 @@ class UserOptionsView extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    UserController controller = UserController();
+                    //UserController controller = UserController();
                     //controller.picker(context);
-
-                    controller.login(mail: "lfdel24@gmail.coma", pass: "1");
                   },
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(100),

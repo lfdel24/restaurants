@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurants/r_colors.dart';
 import 'package:restaurants/user/controller/user_controller.dart';
-import 'package:restaurants/user/view/user_login_view.dart';
+import 'package:restaurants/user/view/register_user_view.dart';
+import 'package:restaurants/user/view/user_guest_view.dart';
 
-class RegisterUserView extends StatelessWidget {
+class UserLoginView extends StatelessWidget {
   final marginHorizontal = EdgeInsets.symmetric(horizontal: 12);
 
   @override
@@ -13,7 +14,7 @@ class RegisterUserView extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            "Registrar usuario",
+            "Iniciar sesión",
             style: Theme.of(context).textTheme.headline6,
           ),
           elevation: 1,
@@ -36,7 +37,6 @@ class RegisterUserView extends StatelessWidget {
 class _BuildLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print("_BuildLogo");
     return Column(
       children: [
         SizedBox(height: 45),
@@ -59,19 +59,15 @@ class _BuildForm extends StatefulWidget {
 
 class __BuildFormState extends State<_BuildForm> {
   final _formKeyState = GlobalKey<FormState>();
-  final _controllerName = TextEditingController(text: "");
   final _controllerMail = TextEditingController(text: "");
   final _controllerPass = TextEditingController(text: "");
-  final _focusNodeName = FocusNode();
   final _focusNodeMail = FocusNode();
   final _focusNodePass = FocusNode();
 
   @override
   void dispose() {
-    _controllerName.dispose();
     _controllerMail.dispose();
     _controllerPass.dispose();
-    _focusNodeName.dispose();
     _focusNodeMail.dispose();
     _focusNodePass.dispose();
     super.dispose();
@@ -83,19 +79,6 @@ class __BuildFormState extends State<_BuildForm> {
       key: _formKeyState,
       child: Column(
         children: [
-          SizedBox(height: 10),
-          TextFormField(
-              controller: _controllerName,
-              focusNode: _focusNodeName,
-              autofocus: true,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  _focusNodeName.requestFocus();
-                  return "Ingrese un nombre";
-                }
-              },
-              decoration: InputDecoration(
-                  labelText: "Nombre", hintText: "Ingrese su nombre")),
           SizedBox(height: 10),
           TextFormField(
             controller: _controllerMail,
@@ -149,24 +132,25 @@ class __BuildFormState extends State<_BuildForm> {
             child: MaterialButton(
               onPressed: () async {
                 if (_formKeyState.currentState!.validate()) {
-                  var resp = await context.read<UserController>().createUser(
-                      _controllerName,
-                      _controllerMail,
-                      _controllerPass,
-                      _focusNodeName);
+                  context.read<UserController>().login(
+                        mailController: _controllerMail,
+                        passController: _controllerPass,
+                        functionError: () {
+                          final snackBar = SnackBar(
+                            content: Text("Usuario y/o contraseña incorrecta"),
+                            action: SnackBarAction(
+                              label: 'OK',
+                              onPressed: () {},
+                            ),
+                          );
 
-                  final snackBar = SnackBar(
-                    content: Text(resp),
-                    action: SnackBarAction(
-                      label: 'OK',
-                      onPressed: () {},
-                    ),
-                  );
-
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  //TODO: validar siempre cambia a la otra pantalla
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => UserLoginView()));
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        },
+                        functionGood: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => UserGuestView()));
+                        },
+                      );
                 }
               },
               child: Text(
@@ -177,7 +161,13 @@ class __BuildFormState extends State<_BuildForm> {
                     ?.copyWith(color: Colors.white),
               ),
             ),
-          )
+          ),
+          GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => RegisterUserView()));
+              },
+              child: Text("Crear cuenta"))
         ],
       ),
     );
