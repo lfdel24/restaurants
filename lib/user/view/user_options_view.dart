@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:restaurants/custom_widgets/custom_material_button.dart';
-import 'package:restaurants/r_colors.dart';
+import 'package:restaurants/custom_widgets/custom_widgets.dart';
+
+import '../../colors.dart';
 
 class UserOptionsView extends StatelessWidget {
   @override
@@ -19,18 +20,29 @@ class UserOptionsView extends StatelessWidget {
                 SizedBox(
                   height: 125,
                 ),
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     //UserController controller = UserController();
                     //controller.picker(context);
                   },
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: Container(
-                          margin: EdgeInsets.all(9),
-                          width: 80,
-                          height: 80,
-                          color: RColors.purpleAccent)),
+                  child: Stack(
+                    children: [
+                      ClipRRect(
+                          borderRadius: BorderRadius.circular(100),
+                          child: Container(
+                              margin: EdgeInsets.all(9),
+                              width: 80,
+                              height: 80,
+                              color: purpleAccent)),
+                      Positioned(
+                          bottom: 12,
+                          right: 12,
+                          child: Icon(
+                            Icons.camera_alt_outlined,
+                            color: Colors.white,
+                          ))
+                    ],
+                  ),
                 ),
                 Column(
                   children: [
@@ -70,9 +82,10 @@ class UserOptionsView extends StatelessWidget {
             SizedBox(
               height: 30,
             ),
-            CustomMaterialButton(
-              onPressed: () {},
-              label: "Cerrar sesión",
+            customMaterialButton(
+              context,
+              "Cerrar sesión",
+              () {},
             )
           ],
         ),

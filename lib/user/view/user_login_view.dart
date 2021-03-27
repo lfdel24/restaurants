@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurants/r_colors.dart';
+import 'package:restaurants/custom_widgets/custom_widgets.dart';
 import 'package:restaurants/user/controller/user_controller.dart';
-import 'package:restaurants/user/view/register_user_view.dart';
 import 'package:restaurants/user/view/user_guest_view.dart';
+import 'package:restaurants/user/view/user_register_view.dart';
+
+import '../../colors.dart';
 
 class UserLoginView extends StatelessWidget {
   final marginHorizontal = EdgeInsets.symmetric(horizontal: 12);
@@ -117,7 +119,7 @@ class __BuildFormState extends State<_BuildForm> {
                     Icons.remove_red_eye_outlined,
                     color: context.watch<UserController>().showPass
                         ? Colors.black
-                        : RColors.purpleAccent,
+                        : purpleAccent,
                   ),
                   onPressed: () {
                     context.read<UserController>().changeShowPass();
@@ -126,7 +128,7 @@ class __BuildFormState extends State<_BuildForm> {
           ),
           SizedBox(height: 40),
           Container(
-            color: RColors.purpleAccent,
+            color: purpleAccent,
             width: double.infinity,
             height: 50,
             child: MaterialButton(
@@ -136,19 +138,11 @@ class __BuildFormState extends State<_BuildForm> {
                         mailController: _controllerMail,
                         passController: _controllerPass,
                         functionError: () {
-                          final snackBar = SnackBar(
-                            content: Text("Usuario y/o contraseña incorrecta"),
-                            action: SnackBarAction(
-                              label: 'OK',
-                              onPressed: () {},
-                            ),
-                          );
-
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          customSnackBar(
+                              context, "Usuario y/o contraseña incorrecta");
                         },
                         functionGood: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => UserGuestView()));
+                          push(context, UserGuestView());
                         },
                       );
                 }
@@ -162,12 +156,18 @@ class __BuildFormState extends State<_BuildForm> {
               ),
             ),
           ),
-          GestureDetector(
+          SizedBox(
+            height: 12,
+          ),
+          InkWell(
+              child: Text("¿Aún no tienes cuenta? Regístrate",
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText2
+                      ?.copyWith(color: purpleAccent)),
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => RegisterUserView()));
-              },
-              child: Text("Crear cuenta"))
+                push(context, UserRegisterView());
+              })
         ],
       ),
     );

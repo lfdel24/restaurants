@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurants/r_colors.dart';
+import 'package:restaurants/custom_widgets/custom_widgets.dart';
 import 'package:restaurants/user/controller/user_controller.dart';
 import 'package:restaurants/user/view/user_login_view.dart';
 
-class RegisterUserView extends StatelessWidget {
+import '../../colors.dart';
+
+class UserRegisterView extends StatelessWidget {
   final marginHorizontal = EdgeInsets.symmetric(horizontal: 12);
 
   @override
@@ -134,7 +136,7 @@ class __BuildFormState extends State<_BuildForm> {
                     Icons.remove_red_eye_outlined,
                     color: context.watch<UserController>().showPass
                         ? Colors.black
-                        : RColors.purpleAccent,
+                        : purpleAccent,
                   ),
                   onPressed: () {
                     context.read<UserController>().changeShowPass();
@@ -143,7 +145,7 @@ class __BuildFormState extends State<_BuildForm> {
           ),
           SizedBox(height: 40),
           Container(
-            color: RColors.purpleAccent,
+            color: purpleAccent,
             width: double.infinity,
             height: 50,
             child: MaterialButton(
@@ -165,8 +167,7 @@ class __BuildFormState extends State<_BuildForm> {
 
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   //TODO: validar siempre cambia a la otra pantalla
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => UserLoginView()));
+                  push(context, UserLoginView());
                 }
               },
               child: Text(

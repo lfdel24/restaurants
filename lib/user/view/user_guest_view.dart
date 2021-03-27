@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:restaurants/r_colors.dart';
+import 'package:restaurants/custom_widgets/custom_widgets.dart';
 import 'package:restaurants/user/account_utils.dart';
+import 'package:restaurants/user/view/user_options_view.dart';
 
 class UserGuestView extends StatelessWidget {
   @override
@@ -38,21 +39,10 @@ class UserGuestView extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyText2,
               ),
               SizedBox(height: 18),
-              Container(
-                color: RColors.purpleAccent,
-                width: double.infinity,
-                height: 50,
-                child: MaterialButton(
-                  onPressed: () {},
-                  child: Text(
-                    AccountUtils.textButton,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText2
-                        ?.copyWith(color: Colors.white),
-                  ),
-                ),
-              )
+              customMaterialButton(context, "Continuar", () {
+                print("sldfpsmfsmfs OK");
+                push(context, UserOptionsView());
+              })
             ],
           ),
         ));
