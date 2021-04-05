@@ -12,10 +12,6 @@ void customSnackBar(BuildContext context, String title) {
   ScaffoldMessenger.of(context).showSnackBar(snackBar);
 }
 
-void push(BuildContext context, Widget widget) {
-  Navigator.of(context).push(MaterialPageRoute(builder: (context) => widget));
-}
-
 Widget customMaterialButton(
     BuildContext context, String label, Function onPressed) {
   return Container(

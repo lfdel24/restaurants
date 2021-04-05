@@ -1,15 +1,14 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:restaurants/custom_widgets/utilities.dart';
 import 'package:restaurants/user/model/user_model.dart';
 
 class UserService {
-  String _url = "http://localhost:8080";
-
   Future<bool> create(UserModel user) async {
     try {
       Response response =
-          await Dio().post("$_url/users/save", data: user.toJson());
+          await Dio().post("$baseUrl/users/save", data: user.toJson());
       print(response);
       return true;
     } catch (e) {
@@ -21,7 +20,7 @@ class UserService {
   Future<UserModel> login({required String mail, required String pass}) async {
     try {
       Response response = await Dio()
-          .post("$_url/users/login", data: {"mail": mail, "pass": pass});
+          .post("$baseUrl/users/login", data: {"mail": mail, "pass": pass});
       return UserModel.fromJson(response.data);
     } catch (e) {
       print(e);
@@ -40,7 +39,7 @@ class UserService {
         "file": await MultipartFile.fromFile(path, filename: fileName),
       });
 
-      Response response = await Dio().post("$_url/files/upload", data: data);
+      Response response = await Dio().post("$baseUrl/files/upload", data: data);
       print(response);
       return true;
     } catch (e) {

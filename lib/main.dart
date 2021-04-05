@@ -1,23 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:restaurants/favorites/favorites.dart';
 import 'package:restaurants/restaurants/restaurants.dart';
 import 'package:restaurants/search/search.dart';
 import 'package:restaurants/top_restaurants/top_restaurants.dart';
-import 'package:restaurants/user/controller/user_controller.dart';
 import 'package:restaurants/user/view/account_view.dart';
 
 import 'colors.dart';
 
 void main() {
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => UserController()),
-      ],
-      child: MyApp(),
-    ),
-  );
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

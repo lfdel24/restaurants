@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:restaurants/custom_widgets/custom_widgets.dart';
+import 'package:restaurants/custom_widgets/utilities.dart';
 import 'package:restaurants/user/account_utils.dart';
 import 'package:restaurants/user/view/user_options_view.dart';
 

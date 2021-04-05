@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:restaurants/custom_widgets/custom_widgets.dart';
-import 'package:restaurants/user/controller/user_controller.dart';
-import 'package:restaurants/user/view/user_guest_view.dart';
+import 'package:restaurants/custom_widgets/assets.dart';
+import 'package:restaurants/custom_widgets/text.dart';
+import 'package:restaurants/custom_widgets/utilities.dart';
+import 'package:restaurants/user/controller/user_login_controller.dart';
 import 'package:restaurants/user/view/user_register_view.dart';
 
 import '../../colors.dart';
 
 class UserLoginView extends StatelessWidget {
-  final marginHorizontal = EdgeInsets.symmetric(horizontal: 12);
-
   @override
   Widget build(BuildContext context) {
-    print("RegisterUserView");
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            "Iniciar sesión",
+            iniciarSesion,
             style: Theme.of(context).textTheme.headline6,
           ),
           elevation: 1,
@@ -45,7 +42,7 @@ class _BuildLogo extends StatelessWidget {
         Container(
           height: 150,
           child: Image.asset(
-            "assets/images/logo.png",
+            logo,
             fit: BoxFit.cover,
           ),
         ),
@@ -60,69 +57,62 @@ class _BuildForm extends StatefulWidget {
 }
 
 class __BuildFormState extends State<_BuildForm> {
-  final _formKeyState = GlobalKey<FormState>();
-  final _controllerMail = TextEditingController(text: "");
-  final _controllerPass = TextEditingController(text: "");
-  final _focusNodeMail = FocusNode();
-  final _focusNodePass = FocusNode();
+  final controller = UserLoginController();
 
   @override
   void dispose() {
-    _controllerMail.dispose();
-    _controllerPass.dispose();
-    _focusNodeMail.dispose();
-    _focusNodePass.dispose();
+    controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: _formKeyState,
+      key: controller.formState,
       child: Column(
         children: [
           SizedBox(height: 10),
           TextFormField(
-            controller: _controllerMail,
-            focusNode: _focusNodeMail,
+            controller: controller.controllerMail,
+            focusNode: controller.focusNodeMail,
             validator: (value) {
               if (value!.isEmpty) {
-                _focusNodeMail.requestFocus();
-                return "Ingrese un email";
+                controller.focusNodeMail.requestFocus();
+                return ingreseUnEmail;
               }
             },
-            decoration: InputDecoration(
-                labelText: "Correo", hintText: "Ingrese un correo"),
+            decoration:
+                InputDecoration(labelText: email, hintText: ingreseUnEmail),
           ),
           SizedBox(height: 10),
           Row(
             children: [
               Expanded(
                 child: TextFormField(
-                  focusNode: _focusNodePass,
-                  obscureText: context.read<UserController>().showPass,
-                  controller: _controllerPass,
+                  focusNode: controller.focusNodePass,
+                  obscureText: controller.showPass,
+                  controller: controller.controllerPass,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      _focusNodePass.requestFocus();
-                      return "Ingrese una contraseña";
+                      controller.focusNodePass.requestFocus();
+                      return ingreseUnaContrasena;
                     }
                   },
                   decoration: InputDecoration(
-                    labelText: "Contaseña",
-                    hintText: "Ingrese una contraseña",
+                    labelText: contrasena,
+                    hintText: ingreseUnaContrasena,
                   ),
                 ),
               ),
               IconButton(
                   icon: Icon(
                     Icons.remove_red_eye_outlined,
-                    color: context.watch<UserController>().showPass
-                        ? Colors.black
-                        : purpleAccent,
+                    color: controller.showPass ? Colors.black : purpleAccent,
                   ),
                   onPressed: () {
-                    context.read<UserController>().changeShowPass();
+                    setState(() {
+                      controller.changueShowPass();
+                    });
                   }),
             ],
           ),
@@ -133,22 +123,22 @@ class __BuildFormState extends State<_BuildForm> {
             height: 50,
             child: MaterialButton(
               onPressed: () async {
-                if (_formKeyState.currentState!.validate()) {
-                  context.read<UserController>().login(
-                        mailController: _controllerMail,
-                        passController: _controllerPass,
-                        functionError: () {
-                          customSnackBar(
-                              context, "Usuario y/o contraseña incorrecta");
-                        },
-                        functionGood: () {
-                          push(context, UserGuestView());
-                        },
-                      );
+                if (controller.formState.currentState!.validate()) {
+                  // context.read<UserController>().login(
+                  //       mailController: _controllerMail,
+                  //       passController: _controllerPass,
+                  //       functionError: () {
+                  //         customSnackBar(
+                  //             context, usuarioYOContrasenaIncorrecta);
+                  //       },
+                  //       functionGood: () {
+                  //         push(context, UserGuestView());
+                  //       },
+                  //     );
                 }
               },
               child: Text(
-                "Continuar",
+                continuar,
                 style: Theme.of(context)
                     .textTheme
                     .bodyText2
@@ -160,7 +150,7 @@ class __BuildFormState extends State<_BuildForm> {
             height: 12,
           ),
           InkWell(
-              child: Text("¿Aún no tienes cuenta? Regístrate",
+              child: Text(aunNoTienesCuentaRegistrate,
                   style: Theme.of(context)
                       .textTheme
                       .bodyText2
