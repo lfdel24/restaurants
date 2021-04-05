@@ -73,11 +73,12 @@ class __BuildFormState extends State<_BuildForm> {
         children: [
           SizedBox(height: 10),
           TextFormField(
-            controller: controller.controllerMail,
-            focusNode: controller.focusNodeMail,
+            keyboardType: TextInputType.emailAddress,
+            controller: controller.controllerEmail,
+            focusNode: controller.focusNodeEmail,
             validator: (value) {
               if (value!.isEmpty) {
-                controller.focusNodeMail.requestFocus();
+                controller.focusNodeEmail.requestFocus();
                 return ingreseUnEmail;
               }
             },
@@ -89,6 +90,7 @@ class __BuildFormState extends State<_BuildForm> {
             children: [
               Expanded(
                 child: TextFormField(
+                  keyboardType: TextInputType.text,
                   focusNode: controller.focusNodePass,
                   obscureText: controller.showPass,
                   controller: controller.controllerPass,
@@ -106,7 +108,9 @@ class __BuildFormState extends State<_BuildForm> {
               ),
               IconButton(
                   icon: Icon(
-                    Icons.remove_red_eye_outlined,
+                    controller.showPass
+                        ? Icons.remove_red_eye_rounded
+                        : Icons.remove_red_eye_outlined,
                     color: controller.showPass ? Colors.black : purpleAccent,
                   ),
                   onPressed: () {

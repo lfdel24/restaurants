@@ -22,7 +22,7 @@ class UserController extends ChangeNotifier {
     final user = UserModel(
         id: 0,
         name: controllerName.text,
-        mail: controllerMail.text,
+        email: controllerMail.text,
         pass: controllerPass.text);
     var resp = await UserService().create(user);
     if (resp) {
@@ -43,7 +43,7 @@ class UserController extends ChangeNotifier {
       required Function functionGood,
       required Function functionError}) async {
     _user = await UserService()
-        .login(mail: mailController.text, pass: passController.text);
+        .login(email: mailController.text, pass: passController.text);
 
     if (_user.isEmpty()) {
       functionError.call();

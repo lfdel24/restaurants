@@ -8,7 +8,7 @@ class UserService {
   Future<bool> create(UserModel user) async {
     try {
       Response response =
-          await Dio().post("$baseUrl/users/save", data: user.toJson());
+          await Dio().post("$baseUrl/user/save", data: user.toJson());
       print(response);
       return true;
     } catch (e) {
@@ -17,15 +17,15 @@ class UserService {
     return false;
   }
 
-  Future<UserModel> login({required String mail, required String pass}) async {
+  Future<UserModel> login({required String email, required String pass}) async {
     try {
       Response response = await Dio()
-          .post("$baseUrl/users/login", data: {"mail": mail, "pass": pass});
+          .post("$baseUrl/user/login", data: {"email": email, "pass": pass});
       return UserModel.fromJson(response.data);
     } catch (e) {
       print(e);
     }
-    return UserModel(id: 0, name: "", mail: "", pass: "");
+    return UserModel(id: 0, name: "", email: "", pass: "");
   }
 
   Future<bool> uploadImage(String path) async {
@@ -39,7 +39,7 @@ class UserService {
         "file": await MultipartFile.fromFile(path, filename: fileName),
       });
 
-      Response response = await Dio().post("$baseUrl/files/upload", data: data);
+      Response response = await Dio().post("$baseUrl/file/upload", data: data);
       print(response);
       return true;
     } catch (e) {
